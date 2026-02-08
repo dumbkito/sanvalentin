@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Serás mi cita este San Valentín?</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ffafbd, #ffc3a0);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .heart-decoration {
+            position: absolute;
+            color: rgba(255, 105, 180, 0.2);
+            font-size: 2rem;
+            z-index: 0;
+        }
+
+        .heart-1 { top: 20px; left: 30px; }
+        .heart-2 { top: 50px; right: 40px; }
+        .heart-3 { bottom: 40px; left: 40px; }
+        .heart-4 { bottom: 20px; right: 30px; }
+
+        .header {
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            color: #ff4d7e;
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .gif-container {
+            margin: 40px 0;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            max-height: 300px;
+        }
+
+        .gif-container img {
+            width: 100%;
+            height: auto;
+            max-height: 400px;
+            object-fit: cover;
+        }
+
+        .question-container {
+            margin: 40px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .question {
+            font-size: 2rem;
+            color: #ff3366;
+            margin-bottom: 40px;
+            font-weight: 600;
+        }
+
+        .buttons-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+            position: relative;
+            transition: all 0.5s ease;
+            min-height: 120px;
+        }
+
+        .btn {
+            padding: 20px 50px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn-yes {
+            background-color: #ff4d7e;
+            color: white;
+        }
+
+        .btn-yes:hover {
+            background-color: #ff3366;
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(255, 77, 126, 0.3);
+        }
+
+        .btn-no {
+            background-color: #f1f1f1;
+            color: #333;
+        }
+
+        .btn-no:hover {
+            background-color: #e1e1e1;
+            transform: translateY(-5px);
+        }
+
+        .message {
+            margin-top: 40px;
+            padding: 25px;
+            background-color: #fff9fb;
+            border-radius: 15px;
+            border-left: 5px solid #ff4d7e;
+            font-size: 1.5rem;
+            color: #ff3366;
+            display: none;
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .footer {
+            margin-top: 40px;
+            color: #888;
+            font-size: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hearts-counter {
+            font-size: 1.2rem;
+            color: #ff4d7e;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .romantic-message {
+            font-style: italic;
+            color: #666;
+            margin-top: 20px;
+            font-size: 1.1rem;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .question {
+                font-size: 1.8rem;
+            }
+            
+            .btn {
+                padding: 15px 40px;
+                font-size: 1.5rem;
+            }
+            
+            .buttons-container {
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .question {
+                font-size: 1.5rem;
+            }
+            
+            .btn {
+                padding: 12px 30px;
+                font-size: 1.3rem;
+            }
+            
+            .message {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Decoraciones de corazones -->
+        <div class="heart-decoration heart-1"><i class="fas fa-heart"></i></div>
+        <div class="heart-decoration heart-2"><i class="fas fa-heart"></i></div>
+        <div class="heart-decoration heart-3"><i class="fas fa-heart"></i></div>
+        <div class="heart-decoration heart-4"><i class="fas fa-heart"></i></div>
+        
+        <div class="header">
+            <h1>¡Hola mimoooor!</h1>
+            <p class="subtitle">Tengo una pregunta muy especial para ti...</p>
+        </div>
+        
+        <div class="gif-container">
+            <!-- GIF romántico -->
+            <img src="https://i.pinimg.com/736x/6b/08/a7/6b08a79b04dad8ee13521143928f917d.jpg" alt="GIF romántico de San Valentín" id="romanticGif">
+        </div>
+        
+        <div class="question-container">
+            <p class="question">¿Sería mi cita este 14 de febrero?</p>
+            
+            <div class="buttons-container" id="buttonsContainer">
+                <button class="btn btn-yes" id="yesBtn">¡SÍ! <i class="fas fa-heart"></i></button>
+                <button class="btn btn-no" id="noBtn">No</button>
+            </div>
+            
+            <div class="romantic-message">
+                <p>Espero que su respuesta sea tan hermosa como uste</p>
+            </div>
+        </div>
+        
+        <div class="message" id="finalMessage">
+            <p><i class="fas fa-heart"></i> ¡Bueno mimor, nos vemos este 14 en mi habitación! <i class="fas fa-heart"></i></p>
+            <p style="margin-top: 15px; font-size: 1.2rem;">Te estaré esperando con una sorpresa especial... un sushito</p>
+        </div>
+        
+        <div class="footer">
+            <p>Con todo mi amor, para mi monita.</p>
+            <div class="hearts-counter" id="heartsCounter">
+                Intentos para convencerte: <span id="counter">0</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const yesBtn = document.getElementById('yesBtn');
+            const noBtn = document.getElementById('noBtn');
+            const buttonsContainer = document.getElementById('buttonsContainer');
+            const finalMessage = document.getElementById('finalMessage');
+            const counterElement = document.getElementById('counter');
+            const romanticGif = document.getElementById('romanticGif');
+            
+            let noClickCount = 0;
+            let yesSize = 1;
+            let noSize = 1;
+            
+            // Cambiar el GIF si el primero no carga
+            romanticGif.onerror = function() {
+                this.src = "https://media.giphy.com/media/26tknCqiJrBQG6DrC/giphy.gif";
+            };
+            
+            // Configurar el botón "No"
+            noBtn.addEventListener('click', function() {
+                noClickCount++;
+                counterElement.textContent = noClickCount;
+                
+                // Aumentar el tamaño del botón Sí
+                yesSize += 0.3;
+                yesBtn.style.transform = `scale(${yesSize})`;
+                
+                // Disminuir el tamaño del botón No
+                noSize = Math.max(0.1, noSize - 0.2);
+                noBtn.style.transform = `scale(${noSize})`;
+                noBtn.style.opacity = 1 - (noClickCount * 0.2);
+                
+                // Mover el botón No a posiciones aleatorias
+                const maxX = buttonsContainer.offsetWidth - noBtn.offsetWidth;
+                const maxY = buttonsContainer.offsetHeight - noBtn.offsetHeight;
+                
+                const randomX = Math.floor(Math.random() * maxX);
+                const randomY = Math.floor(Math.random() * maxY);
+                
+                noBtn.style.position = 'absolute';
+                noBtn.style.left = `${randomX}px`;
+                noBtn.style.top = `${randomY}px`;
+                
+                // Cambiar el texto del botón No después de algunos intentos
+                const noMessages = [
+                    "yapo",
+                    "xfavoooor",
+                    "ya bastaa",
+                    "acekta q lloro",
+                    "plis",
+                    "bueno ahora si, no",
+                    "yaaaaaaaaaaa",
+                    "chao",
+                    "Si",
+                    "si..."
+                ];
+                
+                if (noClickCount <= noMessages.length) {
+                    noBtn.textContent = noMessages[noClickCount - 1];
+                }
+                
+                // Después de 10 clics, ocultar el botón No y mostrar el mensaje final
+                if (noClickCount >= 10) {
+                    noBtn.style.display = 'none';
+                    finalMessage.style.display = 'block';
+                    
+                    // Cambiar a un GIF de celebración
+                    romanticGif.src = "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExM2F0ZzFrNXM5M2QzZDE3NW9ua2Q0ZHZjZzZ5MjAxNzdhdDRodDJleSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/XpNtk1aw9bePS/giphy.gif";
+                    
+                    // Añadir efecto de confeti
+                    createConfetti();
+                }
+            });
+            
+            // Configurar el botón "Sí"
+            yesBtn.addEventListener('click', function() {
+                // Mostrar mensaje final
+                finalMessage.style.display = 'block';
+                noBtn.style.display = 'none';
+                
+                // Cambiar a un GIF de celebración
+                romanticGif.src = "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExM2F0ZzFrNXM5M2QzZDE3NW9ua2Q0ZHZjZzZ5MjAxNzdhdDRodDJleSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/XpNtk1aw9bePS/giphy.gif";
+                
+                // Añadir efecto de confeti
+                createConfetti();
+                
+                // Cambiar el título
+                document.querySelector('h1').textContent = "¡Eres la mejor mi niña!";
+                
+                // Ocultar el contador
+                document.getElementById('heartsCounter').style.display = 'none';
+            });
+            
+            // Función para crear efecto de confeti
+            function createConfetti() {
+                const confettiColors = ['#ff4d7e', '#ffafbd', '#ff3366', '#ffc3a0', '#ff8fab'];
+                const container = document.querySelector('.container');
+                
+                for (let i = 0; i < 100; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.innerHTML = '<i class="fas fa-heart"></i>';
+                    confetti.style.position = 'absolute';
+                    confetti.style.color = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+                    confetti.style.fontSize = Math.random() * 20 + 10 + 'px';
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.top = '-50px';
+                    confetti.style.opacity = Math.random() * 0.7 + 0.3;
+                    confetti.style.zIndex = '1000';
+                    confetti.style.animation = `fall ${Math.random() * 3 + 2}s linear forwards`;
+                    
+                    // Añadir animación CSS
+                    const style = document.createElement('style');
+                    style.textContent = `
+                        @keyframes fall {
+                            to {
+                                transform: translateY(100vh) rotate(${Math.random() * 360}deg);
+                            }
+                        }
+                    `;
+                    document.head.appendChild(style);
+                    
+                    container.appendChild(confetti);
+                    
+                    // Eliminar el confeti después de la animación
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, 5000);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
